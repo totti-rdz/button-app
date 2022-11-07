@@ -8,12 +8,17 @@ import HomeScreen from "./screens/HomeScreen";
 import SettingsScreen from "./screens/SettingsScreen";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
+export type RootStackParamList = {
+  home: undefined;
+  settings: undefined;
+};
+
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
     <>
-      <StatusBar style="auto" />
+      <StatusBar style="dark" />
       <SafeAreaProvider>
         <NavigationContainer>
           <Stack.Navigator>
@@ -31,7 +36,6 @@ registerRootComponent(App);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
   },
