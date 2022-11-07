@@ -1,15 +1,25 @@
 import { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Keyboard, KeyboardAvoidingView, StyleSheet, Text, View } from "react-native";
 import Input from "../components/Input";
 
 const SettingsScreen = () => {
   const [input, setInput] = useState("");
   const handleChange = (input: string) => setInput(input);
   return (
-    <View style={styles.view}>
-      <Text style={styles.text}>Enter url:</Text>
+    <KeyboardAvoidingView
+      style={styles.view}
+      behavior="height"
+      onStartShouldSetResponder={() => {
+        Keyboard.dismiss();
+        return false;
+      }}
+    >
+      {/* <Text> wrapped in <View> to ensure smooth scrolling when showing keyboard...., */}
+      <View>
+        <Text style={styles.text}>Enter url:</Text>
+      </View>
       <Input value={input} onChangeText={handleChange} />
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 
