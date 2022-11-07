@@ -1,4 +1,6 @@
-import { Platform, Pressable, StyleSheet, Text, View } from "react-native";
+import { useRef } from "react";
+import { Animated, Platform, Pressable, StyleSheet, Text, View } from "react-native";
+import animateScaleEffect from "../helper/animateScaleEffect";
 import COLORS from "../constants/colors";
 
 interface Props {
@@ -7,16 +9,24 @@ interface Props {
 }
 
 const PrimaryButton = ({ children, onPress }: Props) => {
+  const selectedAnim = useRef(new Animated.Value(1)).current;
+
+  const handlePress = () => {
+    animateScaleEffect(selectedAnim);
+    onPress();
+  };
   return (
-    <View style={styles.buttonOuterContainer}>
-      <Pressable
-        onPress={onPress}
-        style={({ pressed }) => (pressed ? [styles.buttonInnerContainer, styles.pressed] : styles.buttonInnerContainer)}
-        android_ripple={{ color: "#fe4848" }}
-      >
-        <Text style={styles.buttonText}>{children}</Text>
-      </Pressable>
-    </View>
+    <Animated.View style={[{ transform: [{ scale: selectedAnim }] }]}>
+      <View style={styles.buttonOuterContainer}>
+        <Pressable
+          onPress={handlePress}
+          style={({ pressed }) => (pressed ? [styles.buttonInnerContainer, styles.pressed] : styles.buttonInnerContainer)}
+          android_ripple={{ color: "#fe4848" }}
+        >
+          <Text style={styles.buttonText}>{children}</Text>
+        </Pressable>
+      </View>
+    </Animated.View>
   );
 };
 
