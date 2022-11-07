@@ -5,6 +5,8 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 import { RootStackParamList } from "../App";
 import IconButton from "../components/IconButton";
+import COLORS from "../constants/colors";
+import Button from "../components/Button";
 
 type HomeScreenProp = NativeStackNavigationProp<RootStackParamList>;
 
@@ -15,13 +17,15 @@ const HomeScreen = () => {
 
   const goToSettings = () => navigation.navigate("settings");
 
+  const handlePress = () => console.log("button pressed!");
+
   return (
     <SafeAreaView style={styles.view}>
       <View style={styles.nav}>
-        <IconButton icon="settings-sharp" size={settingIconSize} color="#5f5e5e" onPress={goToSettings} />
+        <IconButton icon="settings-sharp" size={settingIconSize} color={COLORS.gray} onPress={goToSettings} />
       </View>
       <View style={styles.view}>
-        <Text>HomeScreen</Text>
+        <Button onPress={handlePress}>Tap me!</Button>
       </View>
     </SafeAreaView>
   );
