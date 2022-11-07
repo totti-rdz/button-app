@@ -1,8 +1,10 @@
 {
   "expo": {
-    "name": "button-app",
+    "name": "Button App",
+    "owner": "coasy",
     "slug": "button-app",
     "version": "1.0.0",
+    "scheme": "com.coasy.button_app",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -14,13 +16,13 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
+      "bundleIdentifier": "com.coasy.button_app",
       "supportsTablet": true
     },
     "android": {
+      "package": "com.coasy.button_app",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
