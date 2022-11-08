@@ -6,7 +6,7 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../App";
 import IconButton from "../components/IconButton";
 import COLORS from "../constants/colors";
-import Button from "../components/Button";
+import BigButton from "../components/BigButton";
 
 type HomeScreenProp = NativeStackNavigationProp<RootStackParamList>;
 
@@ -25,7 +25,7 @@ const HomeScreen = () => {
         <IconButton icon="settings-sharp" size={settingIconSize} color={COLORS.gray} onPress={goToSettings} />
       </View>
       <View style={styles.view}>
-        <Button onPress={handlePress}>Tap me!</Button>
+        <BigButton onPress={handlePress}>Tap me!</BigButton>
       </View>
     </SafeAreaView>
   );
