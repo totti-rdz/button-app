@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import { Keyboard, KeyboardAvoidingView, StyleSheet, Text, View } from "react-native";
 import Button from "../components/Button";
 import Input from "../components/Input";
@@ -18,19 +18,28 @@ const SettingsScreen = ({ route }: Props) => {
   const url = route.params.url;
   const navigation = useNavigation<SettingsScreenProp>();
   const [input, setInput] = useState(url || "");
+  const [isUrlAvailable, setIsUrlAvailable] = useState(!!url);
   const handleChange = (input: string) => setInput(input);
 
   const goToHome = () => navigation.navigate("home");
 
   const saveUrl = async () => {
-    if (!input) return;
+    if (!input) return;  
     await localStore.saveUrl(input);
     goToHome();
   };
 
   const handleReset = async () => {
+    setInput("");
+    setIsUrlAvailable(false);
     await localStore.resetUrl();
   };
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerBackVisible: isUrlAvailable,
+    });
+  }, [navigation, isUrlAvailable]);
 
   return (
     <KeyboardAvoidingView
