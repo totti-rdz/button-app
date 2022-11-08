@@ -8,12 +8,12 @@ import HomeScreen from "./screens/HomeScreen";
 import SettingsScreen from "./screens/SettingsScreen";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
-export type RootStackParamList = {
+export type StackParamList = {
   home: undefined;
   settings: { url: string };
 };
 
-const Stack = createNativeStackNavigator<RootStackParamList>();
+const Stack = createNativeStackNavigator<StackParamList>();
 
 export default function App() {
   return (

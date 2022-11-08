@@ -4,14 +4,14 @@ import Button from "../components/Button";
 import Input from "../components/Input";
 import { localStore } from "../services/LocalStore";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { RootStackParamList } from "../App";
+import { StackParamList } from "../App";
 import { useNavigation } from "@react-navigation/native";
-import { RouteProp } from '@react-navigation/native';
+import { RouteProp } from "@react-navigation/native";
 
-type SettingsScreenProp = NativeStackNavigationProp<RootStackParamList>;
+type SettingsScreenProp = NativeStackNavigationProp<StackParamList>;
 
 interface Props {
-  route: RouteProp< RootStackParamList, 'settings'>
+  route: RouteProp<StackParamList, "settings">;
 }
 
 const SettingsScreen = ({ route }: Props) => {

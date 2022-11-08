@@ -3,14 +3,14 @@ import { StyleSheet, Text, useWindowDimensions, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { RootStackParamList } from "../App";
+import { StackParamList } from "../App";
 import IconButton from "../components/IconButton";
 import COLORS from "../constants/colors";
 import BigButton from "../components/BigButton";
 import { localStore } from "../services/LocalStore";
 import ApiService from "../services/ApiServices";
 
-type HomeScreenProp = NativeStackNavigationProp<RootStackParamList>;
+type HomeScreenProp = NativeStackNavigationProp<StackParamList>;
 
 const HomeScreen = () => {
   const [url, setUrl] = useState("");
