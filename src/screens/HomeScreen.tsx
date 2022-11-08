@@ -1,32 +1,45 @@
+import { useState } from "react";
 import { StyleSheet, Text, useWindowDimensions, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useNavigation } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { RootStackParamList } from "../App";
 import IconButton from "../components/IconButton";
 import COLORS from "../constants/colors";
 import BigButton from "../components/BigButton";
+import { localStore } from "../services/LocalStore";
 
 type HomeScreenProp = NativeStackNavigationProp<RootStackParamList>;
 
 const HomeScreen = () => {
+  const [url, setUrl] = useState("");
   const navigation = useNavigation<HomeScreenProp>();
   const { height: screenHeight } = useWindowDimensions();
   const settingIconSize = screenHeight * 0.1 * 0.5; // half of 10 percent of total screen height
 
   const goToSettings = () => navigation.navigate("settings");
 
-  const handlePress = () => console.log("button pressed!");
+  const handlePress = () => console.log("button pressed!", "url:", url);
+
+  useFocusEffect(() => {
+    const getUrl = async () => {
+      const value = await localStore.readUrl();
+      if (!value) {
+        goToSettings();
+        return;
+      }
+      setUrl(value);
+    };
+    getUrl();
+  });
 
   return (
     <SafeAreaView style={styles.view}>
       <View style={styles.nav}>
         <IconButton icon="settings-sharp" size={settingIconSize} color={COLORS.gray} onPress={goToSettings} />
       </View>
-      <View style={styles.view}>
-        <BigButton onPress={handlePress}>Tap me!</BigButton>
-      </View>
+      <View style={styles.view}>{url ? <BigButton onPress={handlePress}>Tap me!</BigButton> : <Text>Loading...</Text>}</View>
     </SafeAreaView>
   );
 };
