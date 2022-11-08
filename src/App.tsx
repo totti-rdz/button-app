@@ -10,10 +10,10 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 
 export type RootStackParamList = {
   home: undefined;
-  settings: undefined;
+  settings: { url: string };
 };
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function App() {
   return (
@@ -23,7 +23,12 @@ export default function App() {
         <NavigationContainer>
           <Stack.Navigator>
             <Stack.Screen name="home" component={HomeScreen} options={{ headerShown: false }} />
-            <Stack.Screen name="settings" component={SettingsScreen} options={{ title: "Settings" }} />
+            <Stack.Screen
+              name="settings"
+              component={SettingsScreen}
+              initialParams={{ url: "" }}
+              options={{ title: "Settings" }}
+            />
           </Stack.Navigator>
         </NavigationContainer>
       </SafeAreaProvider>

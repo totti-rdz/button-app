@@ -6,12 +6,18 @@ import { localStore } from "../services/LocalStore";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../App";
 import { useNavigation } from "@react-navigation/native";
+import { RouteProp } from '@react-navigation/native';
 
 type SettingsScreenProp = NativeStackNavigationProp<RootStackParamList>;
 
-const SettingsScreen = () => {
+interface Props {
+  route: RouteProp< RootStackParamList, 'settings'>
+}
+
+const SettingsScreen = ({ route }: Props) => {
+  const url = route.params.url;
   const navigation = useNavigation<SettingsScreenProp>();
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState(url || "");
   const handleChange = (input: string) => setInput(input);
 
   const goToHome = () => navigation.navigate("home");

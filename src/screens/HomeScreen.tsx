@@ -18,7 +18,7 @@ const HomeScreen = () => {
   const { height: screenHeight } = useWindowDimensions();
   const settingIconSize = screenHeight * 0.1 * 0.5; // half of 10 percent (nav height) of total screen height
 
-  const goToSettings = () => navigation.navigate("settings");
+  const goToSettings = () => navigation.navigate("settings", { url });
 
   const handlePress = () => {
     ApiService.sendRequestTo(url);
