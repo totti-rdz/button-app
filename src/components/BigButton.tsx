@@ -8,7 +8,7 @@ interface Props {
   onPress: () => void;
 }
 
-const Button = ({ children, onPress }: Props) => {
+const BigButton = ({ children, onPress }: Props) => {
   const selectedAnim = useRef(new Animated.Value(1)).current;
 
   const handlePress = () => {
@@ -30,7 +30,7 @@ const Button = ({ children, onPress }: Props) => {
   );
 };
 
-export default Button;
+export default BigButton;
 
 const styles = StyleSheet.create({
   buttonOuterContainer: {
@@ -40,14 +40,14 @@ const styles = StyleSheet.create({
   },
   buttonInnerContainer: {
     backgroundColor: COLORS.red,
-    paddingVertical: 10,
+    paddingVertical: 16,
     paddingHorizontal: 24,
     elevation: 2,
   },
   buttonText: {
     color: "white",
     textAlign: "center",
-    fontSize: 24,
+    fontSize: 60,
     fontWeight: "bold",
   },
   pressed: {
