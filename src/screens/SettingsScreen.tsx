@@ -47,8 +47,8 @@ const SettingsScreen = ({ route }: Props) => {
       </View>
       <Input value={input} onChangeText={handleChange} />
       <View style={styles.buttonContainer}>
-        <Button onPress={saveUrl}>Save</Button>
         <Button onPress={handleReset}>Reset</Button>
+        <Button onPress={saveUrl}>Save</Button>
       </View>
     </KeyboardAvoidingView>
   );
@@ -69,5 +69,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     marginTop: 8,
+    flexDirection: "row",
+    flexWrap: "wrap-reverse",
   },
 });
