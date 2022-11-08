@@ -3,12 +3,12 @@ import { StyleSheet, Text, useWindowDimensions, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { RootStackParamList } from "../App";
 import IconButton from "../components/IconButton";
 import COLORS from "../constants/colors";
 import BigButton from "../components/BigButton";
 import { localStore } from "../services/LocalStore";
+import ApiService from "../services/ApiServices";
 
 type HomeScreenProp = NativeStackNavigationProp<RootStackParamList>;
 
@@ -16,11 +16,13 @@ const HomeScreen = () => {
   const [url, setUrl] = useState("");
   const navigation = useNavigation<HomeScreenProp>();
   const { height: screenHeight } = useWindowDimensions();
-  const settingIconSize = screenHeight * 0.1 * 0.5; // half of 10 percent of total screen height
+  const settingIconSize = screenHeight * 0.1 * 0.5; // half of 10 percent (nav height) of total screen height
 
   const goToSettings = () => navigation.navigate("settings");
 
-  const handlePress = () => console.log("button pressed!", "url:", url);
+  const handlePress = () => {
+    ApiService.sendRequestTo(url);
+  };
 
   useFocusEffect(() => {
     const getUrl = async () => {
