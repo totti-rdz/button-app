@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Keyboard, KeyboardAvoidingView, StyleSheet, Text, View } from "react-native";
+import Button from "../components/Button";
 import Input from "../components/Input";
 
 const SettingsScreen = () => {
@@ -19,6 +20,9 @@ const SettingsScreen = () => {
         <Text style={styles.text}>Enter url:</Text>
       </View>
       <Input value={input} onChangeText={handleChange} />
+      <View style={styles.buttonContainer}>
+        <Button onPress={() => console.log("saving...")}>Save</Button>
+      </View>
     </KeyboardAvoidingView>
   );
 };
@@ -35,5 +39,8 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: 8,
+  },
+  buttonContainer: {
+    marginTop: 8,
   },
 });
