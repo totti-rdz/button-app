@@ -1,11 +1,15 @@
-type METHOD = "GET" | "POST" | "PUT" | "DELTE";
+import JSONObject from "../interfaces/JSON";
+
+type HttpMethod = "GET" | "POST" | "PUT" | "DELTE";
+
+type RequestBody = "string" | JSONObject;
 
 class ApiService {
   public async sendRequestTo(url: string) {
     await this.request("POST", url);
   }
 
-  private async request(method: METHOD, url: string, requestBody?) {
+  private async request(method: HttpMethod, url: string, requestBody?: RequestBody) {
     let body: string | undefined;
 
     if (requestBody) {
