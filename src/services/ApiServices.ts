@@ -6,7 +6,7 @@ type RequestBody = "string" | JSONObject;
 
 class ApiService {
   public async sendRequestTo(url: string) {
-    await this.request("POST", url);
+    return await this.request("POST", url);
   }
 
   private async request(method: HttpMethod, url: string, requestBody?: RequestBody) {
