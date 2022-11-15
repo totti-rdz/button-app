@@ -2,7 +2,7 @@ import { useLayoutEffect, useState } from "react";
 import { Keyboard, KeyboardAvoidingView, StyleSheet, Text, View } from "react-native";
 import Button from "../components/Button";
 import Input from "../components/Input";
-import { localStore } from "../services/LocalStore";
+import { targetUrl } from "../utils/urlUtils";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { StackParamList } from "../App";
 import { useNavigation } from "@react-navigation/native";
@@ -24,15 +24,15 @@ const SettingsScreen = ({ route }: Props) => {
   const goToHome = () => navigation.navigate("home");
 
   const saveUrl = async () => {
-    if (!input) return;  
-    await localStore.saveUrl(input);
+    if (!input) return;
+    await targetUrl.save(input);
     goToHome();
   };
 
   const handleReset = async () => {
     setInput("");
     setIsUrlAvailable(false);
-    await localStore.resetUrl();
+    await targetUrl.reset();
   };
 
   useLayoutEffect(() => {
@@ -50,7 +50,7 @@ const SettingsScreen = ({ route }: Props) => {
         return false;
       }}
     >
-      {/* <Text> wrapped in <View> to ensure smooth scrolling when showing keyboard...., */}
+      {/* <Text> wrapped in <View> to ensure smooth scrolling when showing keyboard... */}
       <View>
         <Text style={styles.text}>Enter url:</Text>
       </View>

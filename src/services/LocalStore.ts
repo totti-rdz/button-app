@@ -1,28 +1,26 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Key } from "../interfaces/localStore";
 
 class LocalStore {
-  public async saveUrl(url: string) {
+  public async save(key: Key, value: string) {
     try {
-      await AsyncStorage.setItem("url", url);
+      await AsyncStorage.setItem(key, value);
     } catch (e) {
-      console.error("Saving url failed", e);
+      console.error(`Saving to LocalStore failed. Trying to save key ${key}. Error: ${e}`);
     }
   }
 
-  public async readUrl() {
-    try {
-      const value = await AsyncStorage.getItem("url");
-      return value;
-    } catch (e) {
-      console.error("Reading url failed", e);
-    }
+  public async read(key: Key) {
+    const value = await AsyncStorage.getItem(key);
+    if (value === null) console.error(`Reading value from LocalStore failed. Key: ${key}`);
+    return value;
   }
 
-  public async resetUrl() {
+  public async reset(key: Key) {
     try {
-      await AsyncStorage.removeItem("url");
+      await AsyncStorage.removeItem(key);
     } catch (e) {
-      console.error("Resetting url failed", e);
+      console.error(`Resetting LocalStore key value failed. Trying to reset key ${key}. Error: ${e}`);
     }
   }
 }

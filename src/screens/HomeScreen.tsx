@@ -10,6 +10,7 @@ import BigButton from "../components/BigButton";
 import { localStore } from "../services/LocalStore";
 import ApiService from "../services/ApiServices";
 import Status from "../components/Status";
+import { targetUrl } from "../utils/urlUtils";
 
 type HomeScreenProp = NativeStackNavigationProp<StackParamList>;
 
@@ -33,7 +34,7 @@ const HomeScreen = () => {
 
   useFocusEffect(() => {
     const getUrl = async () => {
-      const value = await localStore.readUrl();
+      const value = await targetUrl.read();
       if (!value) {
         goToSettings();
         return;
