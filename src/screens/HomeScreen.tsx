@@ -9,10 +9,13 @@ import COLORS from "../constants/colors";
 import BigButton from "../components/BigButton";
 import { localStore } from "../services/LocalStore";
 import ApiService from "../services/ApiServices";
+import Status from "../components/Status";
 
 type HomeScreenProp = NativeStackNavigationProp<StackParamList>;
 
 const HomeScreen = () => {
+  const [loading, setLoading] = useState(false);
+  const [isActive, setIsActive] = useState(false);
   const [url, setUrl] = useState("");
   const navigation = useNavigation<HomeScreenProp>();
   const { height: screenHeight } = useWindowDimensions();
@@ -20,8 +23,12 @@ const HomeScreen = () => {
 
   const goToSettings = () => navigation.navigate("settings", { url });
 
-  const handlePress = () => {
-    ApiService.sendRequestTo(url);
+  const handlePress = async () => {
+    setLoading(true);
+    const response = await ApiService.sendRequestTo(url);
+    console.log("response", response);
+    if (response.status === "success") setIsActive((current) => !current);
+    setLoading(false);
   };
 
   useFocusEffect(() => {
@@ -39,9 +46,16 @@ const HomeScreen = () => {
   return (
     <SafeAreaView style={styles.view}>
       <View style={styles.nav}>
-        <IconButton icon="settings-sharp" size={settingIconSize} color={COLORS.gray} onPress={goToSettings} />
+        {<IconButton icon="settings-sharp" size={settingIconSize} color={COLORS.gray} onPress={goToSettings} />}
       </View>
-      <View style={styles.view}>{url ? <BigButton onPress={handlePress}>Tap me!</BigButton> : <Text>Loading...</Text>}</View>
+      <View style={styles.view}>
+        <Status isActive={isActive} style={styles.status} />
+        {loading ? (
+          <BigButton onPress={() => console.log("loading...")}>loading...</BigButton>
+        ) : (
+          <BigButton onPress={handlePress}>Tap me!</BigButton>
+        )}
+      </View>
     </SafeAreaView>
   );
 };
@@ -60,5 +74,8 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     alignItems: "center",
     paddingHorizontal: 20,
+  },
+  status: {
+    marginBottom: 32,
   },
 });
