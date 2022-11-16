@@ -11,6 +11,7 @@ import ApiService from "../services/ApiServices";
 import Status from "../components/Status";
 import { targetUrl } from "../utils/urlUtils";
 import { status } from "../utils/statusUtils";
+import { filterFullfilledValues } from "../utils/promiseSettledUtils";
 
 type HomeScreenProp = NativeStackNavigationProp<StackParamList>;
 
@@ -37,17 +38,17 @@ const HomeScreen = () => {
 
   useFocusEffect(() => {
     const onFocus = async () => {
-      const [url, localStatus] = await Promise.allSettled([targetUrl.read(), status.read()]);
-      console.log("url", url)
-      if (!url.value) {
+      const results = await Promise.allSettled([targetUrl.read(), status.read()]);
+      const [url, localStatus] = filterFullfilledValues(results);
+      if (!url) {
         goToSettings();
         return;
       }
-      setUrl(url.value);
+      setUrl(url);
       console.log("reading localStatus");
 
-      console.log("localStatus:", localStatus.value);
-      setIsActive(localStatus.value === "true");
+      console.log("localStatus:", localStatus);
+      setIsActive(localStatus === "true");
     };
     onFocus();
   });
