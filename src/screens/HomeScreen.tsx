@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { StyleSheet, useWindowDimensions, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
@@ -7,10 +7,10 @@ import { StackParamList } from "../App";
 import IconButton from "../components/IconButton";
 import COLORS from "../constants/colors";
 import BigButton from "../components/BigButton";
-import { localStore } from "../services/LocalStore";
 import ApiService from "../services/ApiServices";
 import Status from "../components/Status";
 import { targetUrl } from "../utils/urlUtils";
+import { status } from "../utils/statusUtils";
 
 type HomeScreenProp = NativeStackNavigationProp<StackParamList>;
 
@@ -28,20 +28,28 @@ const HomeScreen = () => {
     setLoading(true);
     const response = await ApiService.sendRequestTo(url);
     console.log("response", response);
-    if (response.status === "success") setIsActive((current) => !current);
+    if (response.status === "success") {
+      setIsActive((current) => !current);
+      await status.save(!isActive);
+    }
     setLoading(false);
   };
 
   useFocusEffect(() => {
-    const getUrl = async () => {
-      const value = await targetUrl.read();
-      if (!value) {
+    const onFocus = async () => {
+      const [url, localStatus] = await Promise.allSettled([targetUrl.read(), status.read()]);
+      console.log("url", url)
+      if (!url.value) {
         goToSettings();
         return;
       }
-      setUrl(value);
+      setUrl(url.value);
+      console.log("reading localStatus");
+
+      console.log("localStatus:", localStatus.value);
+      setIsActive(localStatus.value === "true");
     };
-    getUrl();
+    onFocus();
   });
 
   return (
