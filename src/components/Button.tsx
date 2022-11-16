@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { Animated, Platform, Pressable, StyleSheet, Text, View } from "react-native";
+import { Animated, Pressable, StyleSheet, Text, View } from "react-native";
 import animateScaleEffect from "../helper/animateScaleEffect";
 import COLORS from "../constants/colors";
 
