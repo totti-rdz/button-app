@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { StyleSheet, useWindowDimensions, View } from "react-native";
+import { useState } from "react";
+import { ActivityIndicator, StyleSheet, useWindowDimensions, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
@@ -39,6 +39,9 @@ const HomeScreen = () => {
     const onFocus = async () => {
       const results = await Promise.allSettled([targetUrl.read(), status.read()]);
       const [url, localStatus] = filterFullfilledValues(results);
+      if (!localStatus) {
+        status.save(isActive);
+      }
       if (!url) {
         goToSettings();
         return;
@@ -56,11 +59,13 @@ const HomeScreen = () => {
       </View>
       <View style={styles.view}>
         <Status isActive={isActive} style={styles.status} />
-        {loading ? (
-          <BigButton onPress={() => console.log("loading...")}>loading...</BigButton>
-        ) : (
-          <BigButton onPress={handlePress}>Tap me!</BigButton>
-        )}
+        <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+          {!loading ? (
+            <BigButton onPress={handlePress}>Tap me!</BigButton>
+          ) : (
+            <ActivityIndicator size={"large"} color={COLORS.blue} />
+          )}
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -82,6 +87,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   status: {
-    marginBottom: 32,
+    marginTop: 64,
   },
 });
