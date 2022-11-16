@@ -28,7 +28,6 @@ const HomeScreen = () => {
   const handlePress = async () => {
     setLoading(true);
     const response = await ApiService.sendRequestTo(url);
-    console.log("response", response);
     if (response.status === "success") {
       setIsActive((current) => !current);
       await status.save(!isActive);
@@ -45,9 +44,6 @@ const HomeScreen = () => {
         return;
       }
       setUrl(url);
-      console.log("reading localStatus");
-
-      console.log("localStatus:", localStatus);
       setIsActive(localStatus === "true");
     };
     onFocus();
