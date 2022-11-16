@@ -7,6 +7,7 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { StackParamList } from "../App";
 import { useNavigation } from "@react-navigation/native";
 import { RouteProp } from "@react-navigation/native";
+import COLORS from "../constants/colors";
 
 type SettingsScreenProp = NativeStackNavigationProp<StackParamList>;
 
@@ -75,6 +76,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: 8,
+    color: COLORS.white,
   },
   buttonContainer: {
     marginTop: 8,

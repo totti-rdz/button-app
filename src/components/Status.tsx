@@ -27,11 +27,12 @@ const styles = StyleSheet.create({
     fontSize: 48,
     fontWeight: "bold",
     textAlign: "center",
+    color: COLORS.gray,
   },
   textActive: {
     color: COLORS.green,
   },
   textInactive: {
-    color: COLORS.gray,
+    color: COLORS.white,
   },
 });

@@ -1,9 +1,9 @@
 const COLORS = {
   white: "#ffffff",
-  gray: "#5f5e5e",
-  green: "#3A813D",
-  red: "#DC2626",
-  blue: "#2596be",
+  gray: "#949292",
+  green: "#06FF0D",
+  red: "#F0200E",
+  blue: "#2DCBE3",
   black: "#2c2a29",
 };
 

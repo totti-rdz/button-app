@@ -1,12 +1,13 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet } from "react-native";
 import { registerRootComponent } from "expo";
 import { StatusBar } from "expo-status-bar";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import COLORS from "./constants/colors";
 
 import HomeScreen from "./screens/HomeScreen";
 import SettingsScreen from "./screens/SettingsScreen";
-import { SafeAreaProvider } from "react-native-safe-area-context";
 
 export type StackParamList = {
   home: undefined;
@@ -18,16 +19,20 @@ const Stack = createNativeStackNavigator<StackParamList>();
 export default function App() {
   return (
     <>
-      <StatusBar style="dark" />
+      <StatusBar style="light" />
       <SafeAreaProvider>
         <NavigationContainer>
-          <Stack.Navigator>
+          <Stack.Navigator screenOptions={{ contentStyle: { backgroundColor: COLORS.black } }}>
             <Stack.Screen name="home" component={HomeScreen} options={{ headerShown: false }} />
             <Stack.Screen
               name="settings"
               component={SettingsScreen}
               initialParams={{ url: "" }}
-              options={{ title: "Settings" }}
+              options={{
+                title: "Settings",
+                headerStyle: { backgroundColor: COLORS.black },
+                headerTitleStyle: { color: COLORS.white },
+              }}
             />
           </Stack.Navigator>
         </NavigationContainer>
