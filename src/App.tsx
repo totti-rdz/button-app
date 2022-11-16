@@ -32,6 +32,7 @@ export default function App() {
                 title: "Settings",
                 headerStyle: { backgroundColor: COLORS.black },
                 headerTitleStyle: { color: COLORS.white },
+                headerTintColor: COLORS.white,
               }}
             />
           </Stack.Navigator>
