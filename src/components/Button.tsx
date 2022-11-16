@@ -51,6 +51,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   pressed: {
-    opacity: Platform.OS === "ios" ? 0.75 : 1,
+    opacity: 0.75,
   },
 });
