@@ -1,8 +1,8 @@
-import JSONObject from "../interfaces/JSON";
+import JSON from "../interfaces/json";
 
 type HttpMethod = "GET" | "POST" | "PUT" | "DELTE";
 
-type RequestBody = "string" | JSONObject;
+type RequestBody = "string" | JSON;
 
 class ApiService {
   public async sendRequestTo(url: string) {

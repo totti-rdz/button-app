@@ -6,4 +6,6 @@ interface JSONObject {
   [x: string]: JSONValue;
 }
 
-export default JSONObject;
+type JSON = JSONObject | JSONArray;
+
+export default JSON;
