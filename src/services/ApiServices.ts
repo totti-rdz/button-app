@@ -5,8 +5,8 @@ type HttpMethod = "GET" | "POST" | "PUT" | "DELTE";
 type RequestBody = "string" | JSON;
 
 class ApiService {
-  public async sendRequestTo(url: string) {
-    return await this.request("POST", url);
+  public async sendRequestTo(url: string, requestBody?: RequestBody) {
+    return await this.request("POST", url, requestBody);
   }
 
   private async request(method: HttpMethod, url: string, requestBody?: RequestBody) {

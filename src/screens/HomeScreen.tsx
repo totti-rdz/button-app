@@ -27,7 +27,7 @@ const HomeScreen = () => {
 
   const handlePress = async () => {
     setLoading(true);
-    const response = await ApiService.sendRequestTo(url);
+    const response = await ApiService.sendRequestTo(url, [{ status: !isActive }]);
     if (response.status === "success") {
       setIsActive((current) => !current);
       await status.save(!isActive);
