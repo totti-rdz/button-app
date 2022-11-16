@@ -21,7 +21,7 @@ const BigButton = ({ children, onPress }: Props) => {
         <Pressable
           onPress={handlePress}
           style={({ pressed }) => (pressed ? [styles.buttonInnerContainer, styles.pressed] : styles.buttonInnerContainer)}
-          android_ripple={{ color: "#fe4848" }}
+          android_ripple={{ color: COLORS.darkred }}
         >
           <Text style={styles.buttonText}>{children}</Text>
         </Pressable>
@@ -45,12 +45,12 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   buttonText: {
-    color: "white",
+    color: COLORS.white,
     textAlign: "center",
     fontSize: 60,
     fontWeight: "bold",
   },
   pressed: {
-    opacity: Platform.OS === "ios" ? 0.75 : 1,
+    opacity: 0.75,
   },
 });
