@@ -60,7 +60,7 @@ class ApiService {
         throw new Error(await response.text());
       }
     } catch (error) {
-      console.error("ERROR HERE", error);
+      console.error("Fetch failed. url:", url, "error:", error);
     }
   }
 }
