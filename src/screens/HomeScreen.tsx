@@ -26,7 +26,7 @@ const HomeScreen = () => {
   const goToSettings = () => navigation.navigate("settings", { url });
 
   const handlePress = async () => {
-    setLoading(true);
+    setLoading(true); 
     const response = await ApiService.sendRequestTo(url, [{ status: !isActive ? "active" : "inactive" }]);
     if (response?.status === "success") {
       setIsActive((current) => !current);
