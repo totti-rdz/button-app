@@ -20,7 +20,7 @@
       "**/*"
     ],
     "ios": {
-      "bundleIdentifier": "com.coasy.button_app",
+      "bundleIdentifier": "com.coasy.button-app",
       "supportsTablet": true
     },
     "android": {
