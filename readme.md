@@ -21,6 +21,7 @@ eas build --profile preview --platform ios
 ```
 
 This will again output a website accessible by link or qr code where the app can be downloaded and installed.
+When a new device has been registered, make sure to specifically select the device's uuid when asked about the registered devices in the Provisioning Profile.
 On iOS 16 the development mode needs to be activated in order to install preview builds, therefore go to "Settings", then to "Privacy & Security" and scroll down to "Developer Mode" at the bottom.
 
 If there is no "Developer Mode" entry the device needs to be physically connected to a Macbook with Xcode 14. Before connecting the device open a project in Xcode and then connect your device. "Developer Mode" should now be visible in the "Privacy & Security" settings.
