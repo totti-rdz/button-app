@@ -14,10 +14,10 @@ eas device:create
 
 This will output a website accessible by link or qr code to scan on the device. Download the profile and install the profile by following the instructions on the website.
 
-After registering the target device run the following command in the project root folder to create a preview build.
+After registering the target device run the following command in the project root folder to create a preview build for internal distribution and testing on previously registered devices.
 
 ```bash
-eas build --profile development --platform ios
+eas build --profile preview --platform ios
 ```
 
 This will again output a website accessible by link or qr code where the app can be downloaded and installed.
